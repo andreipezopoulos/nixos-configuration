@@ -18,8 +18,8 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "andrei-nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "andrei-nixos";
+  # networking.wireless.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
@@ -44,16 +44,13 @@ in
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   
-
   # Configure keymap in X11
   services.xserver.layout = "br";
   services.xserver.xkbVariant = "abnt2";
-  services.xserver.xkbOptions = "eurosign:e";
   # Use same config (above) for linux console
   console.useXkbConfig = true;
 
@@ -82,6 +79,7 @@ in
     steam
     discord
     spotify
+    kdiff3
   ];
   nixpkgs.config.allowUnfree = true;
   programs.steam.enable = true;
@@ -113,6 +111,10 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.05"; # Did you read the comment?
 
+  # To be able to set GNOME themes via home-manager
+  programs.dconf.enable = true;
+
+  # andrei user
   home-manager.users.andrei = {
     programs.home-manager.enable = true;
 
@@ -129,7 +131,10 @@ in
     # git
     programs.git.enable = true;
     programs.git.userName = "Andrei Pezopoulos";
-    programs.git.userEmail = "andrei.pzg@gmail.com";
+    programs.git.userEmail = "not.my.email.yet@gmail.com";
+    programs.git.extraConfig.diff.tool = "kdiff3";
+    programs.git.extraConfig.merge.tool = "kdiff3";
+    programs.git.extraConfig.difftool.prompt = "false";
   };
 
 }
