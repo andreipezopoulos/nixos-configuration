@@ -123,10 +123,11 @@ in
     programs.vscode.package = pkgs.vscodium; 
     programs.vscode.extensions = with pkgs.vscode-extensions; [
       dracula-theme.theme-dracula
+      pkgs.vscode-extensions.bbenoist.Nix
     ];
 
     # gnome terminal
-    programs.gnome-terminal.themeVariant = "light";
+    programs.gnome-terminal.themeVariant = "dark";
 
     # git
     programs.git.enable = true;
